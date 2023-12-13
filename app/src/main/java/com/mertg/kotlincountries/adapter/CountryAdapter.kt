@@ -4,9 +4,11 @@
     import android.view.View
     import android.view.ViewGroup
     import android.widget.TextView
+    import androidx.navigation.Navigation
     import androidx.recyclerview.widget.RecyclerView
     import com.mertg.kotlincountries.R
     import com.mertg.kotlincountries.model.Country
+    import com.mertg.kotlincountries.view.FeedFragmentDirections
 
     class CountryAdapter(val countryList : ArrayList<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>()
     {
@@ -25,6 +27,11 @@
             // Burada textViewCountryName'e erişebilirsiniz.
             holder.nameTextView.text = countryList[position].countryName
             holder.regionTextView.text = countryList[position].countryRegion
+
+            holder.view.setOnClickListener {
+                val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment()
+                Navigation.findNavController(it).navigate(action)
+            }
         }
 
         override fun getItemCount(): Int {
