@@ -3,11 +3,14 @@
     import android.view.LayoutInflater
     import android.view.View
     import android.view.ViewGroup
+    import android.widget.ImageView
     import android.widget.TextView
     import androidx.navigation.Navigation
     import androidx.recyclerview.widget.RecyclerView
     import com.mertg.kotlincountries.R
     import com.mertg.kotlincountries.model.Country
+    import com.mertg.kotlincountries.util.downloadFromURL
+    import com.mertg.kotlincountries.util.placeholderProgressBar
     import com.mertg.kotlincountries.view.FeedFragmentDirections
 
     class CountryAdapter(val countryList : ArrayList<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>()
@@ -32,6 +35,10 @@
                 val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment()
                 Navigation.findNavController(it).navigate(action)
             }
+
+            holder.view.findViewById<ImageView>(R.id.imageView).downloadFromURL(countryList[position].imageURL,
+                placeholderProgressBar(holder.view.context)
+            )
         }
 
         override fun getItemCount(): Int {

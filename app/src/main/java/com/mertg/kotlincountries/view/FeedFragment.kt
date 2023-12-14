@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.mertg.kotlincountries.R
 import com.mertg.kotlincountries.adapter.CountryAdapter
 import com.mertg.kotlincountries.viewmodel.FeedViewModel
@@ -37,6 +38,7 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val refreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
 
         countryError = view.findViewById(R.id.countryError)
         countryLoading = view.findViewById(R.id.countryLoadingProgressbar)
@@ -50,7 +52,17 @@ class FeedFragment : Fragment() {
         viewModel = ViewModelProvider(this)[FeedViewModel::class.java]
         viewModel.refreshData()
 
+        refreshLayout.setOnRefreshListener {
+            recyclerView.visibility = View.GONE
+            countryError.visibility = View.GONE
+            countryLoading.visibility = View.VISIBLE
+            viewModel.refreshData()
+            refreshLayout.isRefreshing = false
+        }
+
         observeLiveData()
+
+
 
 //        countryList?.layoutManager = LinearLayoutManager(context)
 //        countryList?.adapter = countryAdapter
