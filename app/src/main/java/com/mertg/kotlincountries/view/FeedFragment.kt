@@ -20,7 +20,6 @@ class FeedFragment : Fragment() {
     private lateinit var viewModel : FeedViewModel
 //    private val countryAdapter = CountryAdapter(arrayListOf())
 
-    private lateinit var countryList : RecyclerView
     private lateinit var countryError : TextView
     private lateinit var countryLoading : ProgressBar
 
@@ -56,7 +55,7 @@ class FeedFragment : Fragment() {
             recyclerView.visibility = View.GONE
             countryError.visibility = View.GONE
             countryLoading.visibility = View.VISIBLE
-            viewModel.refreshData()
+            viewModel.refreshfromAPI()
             refreshLayout.isRefreshing = false
         }
 

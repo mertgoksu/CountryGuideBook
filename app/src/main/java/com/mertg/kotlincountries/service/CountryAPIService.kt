@@ -10,7 +10,7 @@ class CountryAPIService {
     private val BASE_URL = "https://raw.githubusercontent.com/"
 
     private val api = Retrofit.Builder()
-        .baseUrl("https://raw.githubusercontent.com/")
+        .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()

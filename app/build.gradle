@@ -51,6 +51,7 @@ def palette_version = '1.0.0'
 def preference_version = '1.2.1'
 
 dependencies {
+    implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.10.0'
@@ -79,7 +80,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxjava_version"
 
-    implementation "com.github.bumptech.glide:glide:$glide_version"
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
 
     implementation "androidx.palette:palette:$palette_version"
     implementation "com.google.android.material:material:$material_version"

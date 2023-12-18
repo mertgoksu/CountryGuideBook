@@ -1,9 +1,11 @@
 package com.mertg.kotlincountries.service
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.mertg.kotlincountries.model.Country
 
+@Dao
 interface CountryDAO {
 
     //Data Access Object
