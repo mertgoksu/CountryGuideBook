@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.mertg.kotlincountries.R
+import com.mertg.kotlincountries.databinding.FragmentCountryBinding
 import com.mertg.kotlincountries.util.downloadFromURL
 import com.mertg.kotlincountries.util.placeholderProgressBar
 import com.mertg.kotlincountries.viewmodel.CountryViewModel
@@ -19,6 +21,7 @@ import com.mertg.kotlincountries.viewmodel.CountryViewModel
 class CountryFragment : Fragment() {
     private lateinit var viewModel : CountryViewModel
     private var countryUUid = 0
+    private lateinit var dataBinding: FragmentCountryBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,8 @@ class CountryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_country, container, false)
+        dataBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_country,container,false)
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,6 +52,9 @@ class CountryFragment : Fragment() {
     private fun observeLiveData() {
         viewModel.countryLiveData.observe(viewLifecycleOwner, Observer { country ->
             country?.let {
+                dataBinding.selectedCountry = country
+
+                /*
                 view?.findViewById<TextView>(R.id.countryName)?.text = country.countryName
                 view?.findViewById<TextView>(R.id.countryCapital)?.text = country.countryCapital
                 view?.findViewById<TextView>(R.id.countryRegion)?.text = country.countryRegion
@@ -56,7 +63,7 @@ class CountryFragment : Fragment() {
                 context?.let {
                     view?.findViewById<ImageView>(R.id.countryFlagImage)?.downloadFromURL(country.imageURL, placeholderProgressBar(it))
                 }
-
+                */
             }
         })
     }

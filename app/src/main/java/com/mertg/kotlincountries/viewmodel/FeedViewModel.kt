@@ -19,6 +19,7 @@ class FeedViewModel(application: Application) : BaseViewModel(application) {
 
     private val countryApiService = CountryAPIService()
     private val disposable = CompositeDisposable()
+
     private var customPreferences = CustomSharedPreferences(getApplication())
     private var refreshTime = 10 * 60 * 1000 * 1000 * 1000L // 10min
 
@@ -33,7 +34,6 @@ class FeedViewModel(application: Application) : BaseViewModel(application) {
         }else {
             getDataFromAPI()
         }
-
     }
 
     fun refreshfromAPI() {
@@ -67,7 +67,6 @@ class FeedViewModel(application: Application) : BaseViewModel(application) {
                         countryError.value = true
                         e.printStackTrace()
                     }
-
                 }
             )
         )
